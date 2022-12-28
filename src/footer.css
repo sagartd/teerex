@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous");
+
+.heading {
+  font-family: "Righteous", sans-serif;
+  color: rgb(32, 32, 206) !important;
+  text-shadow: 2px 2px 5px black;
+  font-size: 2rem;
+}
+
+
+input{
+  padding: 0.5rem;
+}

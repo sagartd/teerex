@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather");
+
+h1, h2{
+  font-family: "Merriweather", sans-serif;
+  color: rgb(99, 99, 99);
+  font-weight: 700;
+}
+
+.butto{
+  font-size: 15px !important;
+  text-shadow: 2px 2px 5px #363836;
+}

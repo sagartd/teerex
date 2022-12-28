@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { GlobalStyle } from "./globalStyle";
+import Footer from "./components/footer";
+import { ThemeProvider } from "styled-components";
+import Home from "./home";
+import Erro from "./erro";
+import Products from "./products";
+import Cart from "./cart";
 
-function App() {
+const App = () => {
+  const customTheme = {
+    colors: {
+      text: "black",
+    },
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={customTheme}>
+      <BrowserRouter>
+        <GlobalStyle />
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<Erro />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
