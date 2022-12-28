@@ -5,17 +5,18 @@ import { createContext } from "react";
 import cartReducer from "./reducer/cartReducer";
 
 const Cart = createContext();
-const localBag = () => {
-  let localBagData = localStorage.getItem("myCart");
+// const localBag = () => {
+//   let localBagData = localStorage.getItem("myCart");
 
-  if (localBagData === []) {
-    return [];
-  } else {
-    return JSON.parse(localBagData);
-  }
-};
+//   if (localBagData === []) {
+//     return [];
+//   } else {
+//     return JSON.parse(localBagData);
+//   }
+// };
 const init = {
-  bag: localBag(),
+  // bag: localBag(),
+  bag: [],
   qty: 1,
   totalQty: 0,
   subtotal: 0,
@@ -38,7 +39,7 @@ const CartContext = ({ children }) => {
   useEffect(() => {
     cartDispatch({ type: "total_bag_quantity" });
     cartDispatch({ type: "total_bag_price" });
-    localStorage.setItem("myCart", JSON.stringify(cartState.bag));
+    //localStorage.setItem("myCart", JSON.stringify(cartState.bag));
   }, [cartState.bag, cartState.totalQty, cartState.qty]);
 
   return (
