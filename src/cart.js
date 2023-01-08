@@ -16,7 +16,7 @@ const Cart = () => {
         <h1>My Bag</h1>
         {bag?.length > 0 ? (
           <Row>
-            <Col lg={8}>
+            <Col lg={8} className="d-flex flex-column">
               {bag?.map((elm) => {
                 return (
                   <div className="bag mb-5" key={elm.id}>
@@ -30,7 +30,11 @@ const Cart = () => {
                       </p>
                       <ButtonGroup>
                         <Button
-                          className="btn-light "
+                          className={
+                            elm.curQty === 1
+                              ? "btn-light opacity-25 disabled"
+                              : "btn-light"
+                          }
                           onClick={() => hndlQtyDecri(elm)}
                         >
                           <GrSubtract style={{ fontSize: "17px" }} />
@@ -42,14 +46,18 @@ const Cart = () => {
                           {elm.curQty}
                         </Button>
                         <Button
-                          className="btn-light"
+                          className={
+                            elm.quantity === elm.curQty
+                              ? "btn-light opacity-25 disabled"
+                              : "btn-light"
+                          }
                           onClick={() => hndlQtyIncri(elm)}
                         >
                           <GrAdd style={{ fontSize: "17px" }} />
                         </Button>
                       </ButtonGroup>
                     </div>
-                    <div>
+                    <div className="d-flex flex-column" style={{width:"6.7rem"}}>
                       <p style={{ fontWeight: 600, opacity: "50%" }}>Price :</p>
                       <p>Rs. {elm.price * elm.curQty}</p>
                     </div>

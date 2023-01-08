@@ -31,6 +31,10 @@ const CartContext = ({ children }) => {
 
   const hndlQtyIncri = (element) => {
     cartDispatch({ type: "incrise_quantity", payload: element });
+    // if (element.quantity === element.curQty) {
+    //   alert("Maximum available stock");
+    // }
+    // console.log(element.quantity);
   };
   const hndlQtyDecri = (element) => {
     cartDispatch({ type: "decrise_quantity", payload: element });
