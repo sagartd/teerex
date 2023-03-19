@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Button, Form } from "react-bootstrap";
 import ByColor from "./FilterBy/byColor";
@@ -9,8 +9,10 @@ import { ConsumeFltrContext } from "../context/fltrContext";
 import { GrClose } from "react-icons/gr";
 
 const Filter = () => {
+  const [show, setShow] = useState(false);
   const { allTShirts, fltrDispatch, isHide } = ConsumeFltrContext();
 
+  //console.log(allTShirts);
   const getData = (data, byCategory) => {
     let setData = data.map((elm) => {
       return elm[byCategory];
@@ -18,6 +20,13 @@ const Filter = () => {
     // if (byCategory === "price") {
     //   setData = setData.sort((a, b) => a - b);
     // }
+    if (byCategory === "color") {
+      let coloData = data.map((elm) => elm[byCategory]);
+      setData = [...new Set(coloData)].map((elm) => ({
+        color: elm,
+        isChecked: false,
+      }));
+    }
     return [...new Set(setData)];
   };
 
@@ -40,8 +49,14 @@ const Filter = () => {
           </Button>
         </div>
         <Form.Group className="mb-5">
-          <h4>Colour</h4>
-          <ByColor coloData={coloData} />
+          <div className="d-flex justify-content-between">
+            <h4>Colour</h4>
+            <Button className="btn-light" onClick={() => setShow(!show)}>
+              {show ? "➖" : "➕"}
+            </Button>
+          </div>
+
+          {show && <ByColor coloData={coloData} />}
         </Form.Group>
 
         <Form.Group className="mb-5">

@@ -10,13 +10,32 @@ const FltrReducer = (state, action) => {
       const { name, value } = action.payload; //dynamic key property
       return { ...state, filters: { ...state.filters, [name]: value } };
 
+    case "color_Filters":
+      let shirts = [...state.allTShirts];
+      let arr = [...action.payload];
+
+      const logi = shirts.filter((elm) =>
+        arr.some((item) => item.isChecked && elm.color === item.color)
+      );
+      if (logi.length === 0) {
+        return {
+          ...state,
+          filterdTees: [...shirts],
+        };
+      } else {
+        return {
+          ...state,
+          filterdTees: [...logi],
+        };
+      }
+
     case "set_Filters":
       let tempfltr = [...state.allTShirts];
-      let { color, gender, type, price, search } = state.filters;
-
-      if (color) {
-        tempfltr = tempfltr.filter((elm) => elm.color.includes(color));
-      }
+      let { gender, type, price, search } = state.filters;
+      //console.log(color);
+      // if (color) {
+      //   tempfltr = tempfltr.filter((elm) => color.includes(elm.color));
+      // }
       if (gender) {
         tempfltr = tempfltr.filter((elm) => elm.gender.includes(gender));
       }
@@ -25,8 +44,9 @@ const FltrReducer = (state, action) => {
       }
       if (search) {
         tempfltr = tempfltr.filter((elm) => {
-          let multVals = elm.name + elm.type + elm.gender;
-          return multVals.toLowerCase().includes(search);
+          let multVals = elm.name;
+          console.log(multVals);
+          return multVals.toLowerCase().includes(search.toLowerCase());
         });
       }
       if (price) {

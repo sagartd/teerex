@@ -28,8 +28,14 @@ const FltrContext = ({ children }) => {
   const hndlUpdate = (e) => {
     let name = e.target.name;
     let value = e.target.value;
-    return fltrDispatch({ type: "update_name_val", payload: { name, value } });
+    fltrDispatch({ type: "update_name_val", payload: { name, value } });
   };
+
+  // const hndlColorCheck = (e) => {
+  //   let check = e.target.checked;
+  //   let valu = e.target.value;
+  //   fltrDispatch({ type: "color_Filters", payload: { valu, check } });
+  // };
 
   useEffect(() => {
     fltrDispatch({ type: "success", payload: tshirts });
@@ -37,10 +43,12 @@ const FltrContext = ({ children }) => {
 
   useEffect(() => {
     fltrDispatch({ type: "set_Filters" });
-  }, [fltrState.filters]);
+  }, [fltrState.filters, fltrState.filters.color]);
 
   return (
-    <Filtered.Provider value={{ ...fltrState, fltrDispatch, hndlUpdate }}>
+    <Filtered.Provider
+      value={{ ...fltrState, fltrDispatch, hndlUpdate }}
+    >
       {children}
     </Filtered.Provider>
   );
